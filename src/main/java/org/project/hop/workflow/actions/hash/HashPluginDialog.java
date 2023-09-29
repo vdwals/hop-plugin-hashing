@@ -131,9 +131,8 @@ public class HashPluginDialog extends BaseTransformDialog implements ITransformD
   public String open() {
     Shell parent = getParent();
 
-    shell = new Shell(parent, SWT.DIALOG_TRIM | SWT.MIN | SWT.MAX | SWT.RESIZE);
+    shell = new Shell(parent, SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MIN | SWT.MAX);
     PropsUi.setLook(shell);
-    shell.setMinimumSize(400, 520);
     setShellImage(shell, input);
 
     ModifyListener lsMod = e -> input.setChanged();
@@ -196,6 +195,13 @@ public class HashPluginDialog extends BaseTransformDialog implements ITransformD
     fdSeparator.right = new FormAttachment(100, 0);
     separator.setLayoutData(fdSeparator);
 
+    Label wlFields = new Label(shell, SWT.NONE);
+    wlFields.setText(BaseMessages.getString(PKG, "HashPlugin.Fields.Label"));
+    PropsUi.setLook(wlFields);
+    FormData fdlFields = new FormData();
+    fdlFields.left = new FormAttachment(0, 0);
+    wlFields.setLayoutData(fdlFields);
+
     final int nrFieldsRows = input.getFunctions().size();
 
     colinf = new ColumnInfo[] {
@@ -222,6 +228,7 @@ public class HashPluginDialog extends BaseTransformDialog implements ITransformD
 
     FormData fdFields = new FormData();
     fdFields.left = new FormAttachment(0, 0);
+    fdFields.top = new FormAttachment(wlFields, margin);
     fdFields.right = new FormAttachment(100, 0);
     fdFields.bottom = new FormAttachment(hSeparator, -fdMargin);
     wFields.setLayoutData(fdFields);
